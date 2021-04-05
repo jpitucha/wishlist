@@ -12,6 +12,17 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - wishlist-network
+  backend:
+    container_name: wl-backend
+    build: ./backend/
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend/src:/usr/src/app/src
+    depends_on:
+      - database
+    networks:
+      - wishlist-network
 
 volumes:
   pgdata:
